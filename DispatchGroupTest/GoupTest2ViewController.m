@@ -11,19 +11,19 @@
 
 @interface GoupTest2ViewController ()
 {
-    __weak IBOutlet UIImageView *_imageView;
-    __weak IBOutlet UIImageView *_imageView2;
-    __weak IBOutlet UIImageView *_imageView3;
+    __weak IBOutlet UIImageView *_imageView; // イメージのアウトレット
+    __weak IBOutlet UIImageView *_imageView2; // イメージのアウトレット
+    __weak IBOutlet UIImageView *_imageView3; // イメージのアウトレット
     
-    __weak NSURLConnection* _connection;
-    __weak NSURLConnection* _connection2;
-    __weak NSURLConnection* _connection3;
+    __weak NSURLConnection* _connection; // 通信用のインスタンス
+    __weak NSURLConnection* _connection2; // 通信用のインスタンス 
+    __weak NSURLConnection* _connection3; // 通信用のインスタンス
     
-    NSMutableData* _data;
-    NSMutableData* _data2;
-    NSMutableData* _data3;
+    NSMutableData* _data; // 通信データを受け取るオブジェクト
+    NSMutableData* _data2; // 通信データを受け取るオブジェクト
+    NSMutableData* _data3; // 通信データを受け取るオブジェクト
     
-    dispatch_group_t _group;
+    dispatch_group_t _group; // Dispatch Group のオブジェクト
 }
 
 @end
@@ -59,7 +59,8 @@
         
         NSURLConnection* connection = [NSURLConnection connectionWithRequest:[NSURLRequest requestWithURL:URL] delegate:self];
         
-        dispatch_group_enter(_group);
+        if( connection != nil )
+            dispatch_group_enter(_group);
         
         NSUInteger index = [URLs indexOfObject:textURL];
         switch (index) {
@@ -126,6 +127,7 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
+    // データの読み込みを開始する
     if( connection == _connection ){
         _data = [[NSMutableData alloc] init];
     }else if( connection == _connection2 ){
@@ -137,6 +139,7 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
+    // 送信されてきたデータを受け付ける
     if( connection == _connection ){
         [_data appendData:data];
     }else if( connection == _connection2 ){
@@ -150,10 +153,13 @@
 {
     if( connection == _connection ){
         dispatch_group_leave(_group);
+            // グループから抜ける
     }else if( connection == _connection2 ){
         dispatch_group_leave(_group);
+            // グループから抜ける
     }else if( connection == _connection3 ){
         dispatch_group_leave(_group);
+            // グループから抜ける
     }
     
 }
@@ -162,10 +168,13 @@
 {
     if( connection == _connection ){
         dispatch_group_leave(_group);
+            // グループから抜ける
     }else if( connection == _connection2 ){
         dispatch_group_leave(_group);
+            // グループから抜ける
     }else if( connection == _connection3 ){
         dispatch_group_leave(_group);
+            // グループから抜ける
     }
 }
 
