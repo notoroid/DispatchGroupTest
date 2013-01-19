@@ -60,7 +60,7 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
 
-    cell.textLabel.text = indexPath.row == 0 ? @"完了後に纏め仕事" : @"完了後に纏め仕事2";
+    cell.textLabel.text = indexPath.row == 0 ? @"通信処理後に完了処理" : @"通信処理後に完了処理2";
     return cell;
 }
 
