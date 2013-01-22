@@ -88,7 +88,10 @@
     dispatch_async(queue, ^{
         
 #define CHECK_INTERVAL 1
+        
+        
         dispatch_time_t timeInterval = dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * CHECK_INTERVAL);
+        
         BOOL bContinued = YES;
         NSInteger remainCount = 7;
             // リトライカウントを用意する
@@ -118,6 +121,8 @@
                     });
                     bContinued = NO;
                         // チェックから抜ける
+                }else{
+                    timeInterval = dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * CHECK_INTERVAL);
                 }
             }
         }
