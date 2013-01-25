@@ -43,7 +43,7 @@
 {
     [super viewDidLoad];
  
-    
+    // 3つの画像を指定する
     NSArray* URLs = @[@"http://irimasu.com/files/FlashAgent_512x512.jpg",@"http://irimasu.com/files/WallPaperOblongood_512x512.jpg",@"http://irimasu.com/files/GL01PStatus_512x512.jpg"];
 
     _group = dispatch_group_create();
